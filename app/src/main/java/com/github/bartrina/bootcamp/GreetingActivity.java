@@ -19,6 +19,6 @@ public class GreetingActivity extends AppCompatActivity {
         String name = intent.getStringExtra(EXTRA_NAME);
 
         TextView textView = findViewById(R.id.greeting_textv_message);
-        textView.setText("Welcome " + name + "!!");
+        textView.setText("Welcome " + name + "!");
     }
 }
