@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Bootcamp</string>
+    <string name="main_ptext_name_hint">Name</string>
+    <string name="main_butt_go_text">GO</string>
+    <string name="weather_ptext_title_text">Weather</string>
+    <string name="weather_ptext_address_hint">Address</string>
+    <string name="weather_butt_search_text">Search</string>
+    <string name="main_menu_butt_weather_text">Weather</string>
+</resources>
