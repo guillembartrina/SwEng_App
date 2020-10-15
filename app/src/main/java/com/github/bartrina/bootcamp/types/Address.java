@@ -1,5 +1,6 @@
 package com.github.bartrina.bootcamp.types;
 
+import java.util.Arrays;
 import java.util.List;
 
 public final class Address {
@@ -11,6 +12,21 @@ public final class Address {
 
     public List<String> getLines() {
         return lines;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Address)) {
+            return false;
+        }
+
+        Address c = (Address) o;
+
+        return Arrays.deepEquals(lines.toArray(), c.lines.toArray());
     }
 
     @Override

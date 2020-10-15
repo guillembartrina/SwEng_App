@@ -1,6 +1,7 @@
 package com.github.bartrina.bootcamp.domain;
 
 import com.github.bartrina.bootcamp.data.HTTPRequester;
+import com.github.bartrina.bootcamp.data.SimpleHTTPRequester;
 import com.github.bartrina.bootcamp.types.WeatherReport;
 import com.github.bartrina.bootcamp.types.Location;
 
@@ -12,11 +13,10 @@ import org.json.JSONTokener;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public final class OpenWeatherMap implements WeatherProvider {
     private final String key;
@@ -25,8 +25,12 @@ public final class OpenWeatherMap implements WeatherProvider {
     private static final String EXCLUDE = "minutely,hourly,alerts";
     private static final String ICON_URL = "https://openweathermap.org/img/wn/";
 
+    private HTTPRequester requester = new SimpleHTTPRequester();
+
+    @Inject
     public OpenWeatherMap(String key) {
         this.key = key;
+        this.requester = requester;
     }
 
     public List<WeatherReport> getForecast(Location location, int days) throws IOException {
@@ -38,7 +42,7 @@ public final class OpenWeatherMap implements WeatherProvider {
                 "&exclude=" + EXCLUDE +
                 "&appid=" + key;
 
-        String result = HTTPRequester.get(new URL(query));
+        String result = requester.get(new URL(query));
 
         List<WeatherReport> ret = new ArrayList<>();
         try {

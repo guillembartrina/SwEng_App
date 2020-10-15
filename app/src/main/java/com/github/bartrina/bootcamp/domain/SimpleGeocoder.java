@@ -10,11 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
 public final class SimpleGeocoder implements GeocodingProvider {
 
     private final Geocoder geocoder;
 
-    public SimpleGeocoder(Context context) {
+    @Inject
+    public SimpleGeocoder(@ApplicationContext Context context) {
         geocoder = new Geocoder(context);
     }
 

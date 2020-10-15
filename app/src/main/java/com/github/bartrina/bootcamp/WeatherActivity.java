@@ -3,7 +3,6 @@ package com.github.bartrina.bootcamp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,7 +26,21 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class WeatherActivity extends AppCompatActivity {
+
+    @Inject
+    public WeatherProvider weatherer;
+    @Inject
+    public LocationProvider locator;
+    @Inject
+    public GeocodingProvider geocoder;
+    @Inject
+    public HTTPRequester requester;
 
     private EditText address;
     private Switch current;
@@ -35,10 +48,6 @@ public class WeatherActivity extends AppCompatActivity {
     private Button search;
     private TextView dispaddress;
     private TextView dispcoords;
-
-    private WeatherProvider weatherer;
-    private LocationProvider locator;
-    private GeocodingProvider geocoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +66,13 @@ public class WeatherActivity extends AppCompatActivity {
             finish();
         }
 
+        /*
         Context context = getApplicationContext();
-
         String key = getResources().getString(R.string.OWM_key);
         weatherer = new OpenWeatherMap(key);
         locator = new SimpleLocator(context);
         geocoder = new SimpleGeocoder(context);
+        */
     }
 
     public void searchClicked(View view) {
@@ -153,7 +163,7 @@ public class WeatherActivity extends AppCompatActivity {
             ImageView icon = new ImageView(this);
             Bitmap bmp = null;
             try {
-                bmp = HTTPRequester.getBitmap(forecast.get(i).icon);
+                bmp = requester.getBitmap(forecast.get(i).icon);
             } catch (IOException e) {
                 search.setError("Something went wrong!");
                 return;
