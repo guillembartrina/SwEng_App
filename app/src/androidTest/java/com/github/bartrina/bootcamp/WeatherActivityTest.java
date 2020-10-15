@@ -1,5 +1,6 @@
 package com.github.bartrina.bootcamp;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -9,6 +10,7 @@ import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.rule.GrantPermissionRule;
 
 import com.github.bartrina.bootcamp.data.HTTPRequester;
 import com.github.bartrina.bootcamp.data.HTTPRequesterModule;
@@ -50,6 +52,15 @@ public class WeatherActivityTest {
     @Rule
     public RuleChain rule = RuleChain.outerRule(new HiltAndroidRule(this))
             .around(new ActivityScenarioRule<>(WeatherActivity.class));
+
+    @Rule
+    public GrantPermissionRule runtimePermission1 = GrantPermissionRule.grant(Manifest.permission.ACCESS_FINE_LOCATION);
+
+    @Rule
+    public GrantPermissionRule runtimePermission2 = GrantPermissionRule.grant(Manifest.permission.ACCESS_COARSE_LOCATION);
+
+    @Rule
+    public GrantPermissionRule runtimePermission3 = GrantPermissionRule.grant(Manifest.permission.INTERNET);
 
     @BindValue
     public WeatherProvider weatherer = Mockito.mock(WeatherProvider.class);
