@@ -117,7 +117,8 @@ public class WeatherActivityTest {
         Mockito.when(geocoder.location2Address(fakeLocation1)).thenReturn(new Address(Collections.singletonList(address1)));
 
         ViewInteraction current = Espresso.onView(ViewMatchers.withId(R.id.weather_sw_current));
-        current.check(ViewAssertions.matches(ViewMatchers.isNotChecked())).perform(ViewActions.click());
+        current.perform(ViewActions.closeSoftKeyboard());
+        current.perform(ViewActions.click());
         ViewInteraction search = Espresso.onView(ViewMatchers.withId(R.id.weather_butt_search));
         search.perform(ViewActions.click());
 
