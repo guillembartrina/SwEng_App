@@ -110,7 +110,6 @@ public class WeatherActivityTest {
         Mockito.when(requester.getBitmap(fakeURL)).thenReturn(Bitmap.createBitmap(20, 20, Bitmap.Config.ARGB_8888));
     }
 
-    /*
     @Test
     public void currentLocationGivesOK() throws IOException {
 
@@ -118,7 +117,7 @@ public class WeatherActivityTest {
         Mockito.when(geocoder.location2Address(fakeLocation1)).thenReturn(new Address(Collections.singletonList(address1)));
 
         ViewInteraction current = Espresso.onView(ViewMatchers.withId(R.id.weather_sw_current));
-        current.perform(ViewActions.click());
+        current.check(ViewAssertions.matches(ViewMatchers.isNotChecked())).perform(ViewActions.click());
         ViewInteraction search = Espresso.onView(ViewMatchers.withId(R.id.weather_butt_search));
         search.perform(ViewActions.click());
 
@@ -132,8 +131,6 @@ public class WeatherActivityTest {
         ViewInteraction outtable = Espresso.onView(ViewMatchers.withId(R.id.weather_tl_table));
         outtable.check(ViewAssertions.matches(ViewMatchers.hasChildCount(4)));
     }
-
-     */
 
     @Test
     public void enteredLocationGivesOK() throws IOException {
