@@ -110,6 +110,7 @@ public class WeatherActivityTest {
         Mockito.when(requester.getBitmap(fakeURL)).thenReturn(Bitmap.createBitmap(20, 20, Bitmap.Config.ARGB_8888));
     }
 
+    /*
     @Test
     public void currentLocationGivesOK() throws IOException {
 
@@ -131,6 +132,8 @@ public class WeatherActivityTest {
         ViewInteraction outtable = Espresso.onView(ViewMatchers.withId(R.id.weather_tl_table));
         outtable.check(ViewAssertions.matches(ViewMatchers.hasChildCount(4)));
     }
+
+     */
 
     @Test
     public void enteredLocationGivesOK() throws IOException {
